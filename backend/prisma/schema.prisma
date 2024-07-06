@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//-----------------LAYER-1-------------------------------------
+
+model User{
+  userId String @id @default(uuid())
+  mail String @unique
+  password String
+  firstname String
+  lastname String?
+  address String
+  mobilenumber String @unique
+  age Int
+  gender String
+  orders Order[]
+  refund Refund[]
+
+}
+
+model Restaurant{
+  restId String @id @default(uuid())
+  restname String
+  mail String @unique
+  ownername String
+  age Int
+  address String
+  mobilenumber String @unique
+  isAvailable Boolean @default(true)
+  orders Order[]
+  refund Refund[]
+  menu Menu[]
+}
+
+model DeliveryPartner{
+  deliveryPartnerId String @id @default(uuid())
+  name String
+  mail String @unique
+  password String
+  address String
+  age Int
+  mobilenumber String @unique
+  isAvailable Boolean @default(true)
+  orders Order[]
+}
+
+model Order{
+  orderId String @id @default(uuid())
+  userId String 
+  restId String 
+  partnerId String
+  refund Boolean @default(false)
+  items ItemsOrdered[]
+
+  user User @relation(fields: [userId] , references: [userId])
+  rest Restaurant @relation(fields: [restId] , references: [restId])
+  dp DeliveryPartner @relation(fields: [partnerId] , references: [deliveryPartnerId])
+
+}
+
+model ItemsOrdered{
+  itemId String @id @default(uuid())
+  itemname String 
+  quantity Int
+  orderId String 
+  refundId String?
+
+  refund Refund? @relation(fields: [refundId] , references: [refundId])
+  order Order @relation(fields: [orderId] , references: [orderId])
+}
+
+model Refund{
+  refundId String @id @default(uuid())
+  orderId String
+  restId String
+  userId String
+  isAvailable Boolean @default(false)
+  item ItemsOrdered[]
+
+  rest Restaurant @relation(fields: [restId] , references: [restId])
+
+  user User @relation(fields: [userId] , references: [userId])
+}
+
+model Menu{
+  menuId String @id @default(uuid())
+  restId String 
+  itemname String
+  description String?
+  type ItemType
+  isAvailable Boolean @default(true)
+
+  rest Restaurant @relation(fields: [restId] , references: [restId])
+}
+
+
+enum ItemType{
+Veg 
+NonVeg
+}
