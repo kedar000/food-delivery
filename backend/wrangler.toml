@@ -3,6 +3,7 @@ compatibility_date = "2023-12-01"
 
  [vars]
 DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMDRjMjdhMzMtNmQ5Yi00NjdiLTg1MWUtYjUwMDVjNWJmNmUwIiwidGVuYW50X2lkIjoiNzIzMTQ3NGRiZWNmMDg5Nzk1ZDQwZjhmNmJjZWYzOWExYWY5YTBlN2IyNzBkNmY0ZTZiZmEzYjU4YTIyYjQ3ZSIsImludGVybmFsX3NlY3JldCI6ImMwZGUxNTY2LWE3YTYtNDcyNi1iMGE0LTk3NmYyNjRhMTI1OSJ9.IGJIuemU_BDq12jIDi9TaVJA4yXIY-ApuMVpBeyFAnw"
+JWT_SECRET = "food-delivery-kedar10396"
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

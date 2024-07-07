@@ -28,6 +28,7 @@ model Restaurant{
   restId String @id @default(uuid())
   restname String?
   mail String @unique
+  password String
   ownername String
   age Int?
   address String?
@@ -40,7 +41,7 @@ model Restaurant{
 
 model DeliveryPartner{
   deliveryPartnerId String @id @default(uuid())
-  name String?
+  name String
   mail String @unique
   password String
   address String?
@@ -91,12 +92,13 @@ model Refund{
 model Menu{
   menuId String @id @default(uuid())
   restId String 
-  itemname String
+  itemname String 
   description String?
   type ItemType
   isAvailable Boolean @default(true)
 
   rest Restaurant @relation(fields: [restId] , references: [restId])
+  @@unique([restId, itemname])
 }
 
 
