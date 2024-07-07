@@ -15,10 +15,10 @@ model User{
   password String
   firstname String
   lastname String?
-  address String
-  mobilenumber String @unique
-  age Int
-  gender String
+  address String?
+  mobilenumber String? @unique
+  age Int?
+  gender String?
   orders Order[]
   refund Refund[]
 
@@ -26,12 +26,12 @@ model User{
 
 model Restaurant{
   restId String @id @default(uuid())
-  restname String
+  restname String?
   mail String @unique
   ownername String
-  age Int
-  address String
-  mobilenumber String @unique
+  age Int?
+  address String?
+  mobilenumber String? @unique
   isAvailable Boolean @default(true)
   orders Order[]
   refund Refund[]
@@ -40,12 +40,12 @@ model Restaurant{
 
 model DeliveryPartner{
   deliveryPartnerId String @id @default(uuid())
-  name String
+  name String?
   mail String @unique
   password String
-  address String
-  age Int
-  mobilenumber String @unique
+  address String?
+  age Int?
+  mobilenumber String? @unique
   isAvailable Boolean @default(true)
   orders Order[]
 }
