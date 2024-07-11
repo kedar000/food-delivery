@@ -53,3 +53,5 @@ deliveryPartnerRoute.post('/signin' , async(c)=>{
     const token = await sign({id : dp.deliveryPartnerId} , c.env.JWT_SECRET)
     return c.json({token : token})
 })
+
+deliveryPartnerRoute.post('/edit', )

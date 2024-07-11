@@ -7,6 +7,7 @@ import { userRoute } from './Routes/User/User'
 import { restaurantRoute } from './Routes/Restaurant/restaurant'
 import { deliveryPartnerRoute } from './Routes/DeliveryPartner/deliveryPartner'
 import { menuRoute } from './Routes/Restaurant/menu'
+import { orderRoute } from './Routes/User/order'
 
 
 const app = new Hono<{
@@ -17,6 +18,7 @@ const app = new Hono<{
 }>()
 
 app.route('api/v1/user' , userRoute);
+app.route('api/v1/user/cart' , orderRoute);
 app.route('api/v1/restaurant' , restaurantRoute);
 app.route('api/v1/restaurant/menu' , menuRoute);
 app.route('api/v1/deliverypartner' , deliveryPartnerRoute);

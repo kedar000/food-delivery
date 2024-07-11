@@ -34,6 +34,7 @@ model Restaurant{
   address String?
   mobilenumber String? @unique
   isAvailable Boolean @default(true)
+  orderprepstatus Boolean @default(false)
   orders Order[]
   refund Refund[]
   menu Menu[]
@@ -47,6 +48,10 @@ model DeliveryPartner{
   address String?
   age Int?
   mobilenumber String? @unique
+  
+  orderstatus Boolean @default(false)
+  itemstatus Boolean @default(false)
+  
   isAvailable Boolean @default(true)
   orders Order[]
 }
@@ -55,9 +60,13 @@ model Order{
   orderId String @id @default(uuid())
   userId String 
   restId String 
-  partnerId String
+  partnerId String 
   refund Boolean @default(false)
-  items ItemsOrdered[]
+  orderstatus Boolean @default(false) 
+  // items ItemsOrdered[]
+  items Json // itemname , itemquantity  
+
+  prepStatus Boolean @default(false)
 
   user User @relation(fields: [userId] , references: [userId])
   rest Restaurant @relation(fields: [restId] , references: [restId])
@@ -65,16 +74,16 @@ model Order{
 
 }
 
-model ItemsOrdered{
-  itemId String @id @default(uuid())
-  itemname String 
-  quantity Int
-  orderId String 
-  refundId String?
+// model ItemsOrdered{
+//   itemId String @id @default(uuid())
+//   itemname String 
+//   quantity Int
+//   orderId String 
+//   refundId String?
 
-  refund Refund? @relation(fields: [refundId] , references: [refundId])
-  order Order @relation(fields: [orderId] , references: [orderId])
-}
+//   refund Refund? @relation(fields: [refundId] , references: [refundId])
+//   // order Order @relation(fields: [orderId] , references: [orderId])
+// }
 
 model Refund{
   refundId String @id @default(uuid())
@@ -82,7 +91,7 @@ model Refund{
   restId String
   userId String
   isAvailable Boolean @default(false)
-  item ItemsOrdered[]
+  item Json
 
   rest Restaurant @relation(fields: [restId] , references: [restId])
 
@@ -92,7 +101,7 @@ model Refund{
 model Menu{
   menuId String @id @default(uuid())
   restId String 
-  itemname String 
+  itemname String
   description String?
   type ItemType
   isAvailable Boolean @default(true)
@@ -103,6 +112,6 @@ model Menu{
 
 
 enum ItemType{
-Veg 
-NonVeg
+VEG 
+NONVEG
 }
