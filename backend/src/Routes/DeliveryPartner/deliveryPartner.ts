@@ -54,4 +54,3 @@ deliveryPartnerRoute.post('/signin' , async(c)=>{
     return c.json({token : token})
 })
 
-deliveryPartnerRoute.post('/edit', )
